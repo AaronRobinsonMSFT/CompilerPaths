@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>CompilerPaths.BuildTasks</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.5.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop" Version="2.3.2262-g94fae01e" />
+  </ItemGroup>
+
+  <!--
+    NuGet properties and items
+    -->
+
+  <PropertyGroup>
+    <PackageId>CompilerPaths</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>AaronRobinsonMSFT</Authors>
+    <Owners>AaronRobinsonMSFT</Owners>
+    <Description>Package used to discover compiler paths in MSBuild.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/AaronRobinsonMSFT/CompilerPaths</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AaronRobinsonMSFT/CompilerPaths</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>MSBuild</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../Targets/CompilerPaths.targets" Pack="True" PackagePath="build/" />
+  </ItemGroup>
+
+</Project>
