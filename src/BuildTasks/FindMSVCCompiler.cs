@@ -116,10 +116,15 @@ namespace CompilerPaths.BuildTasks
             }
 
             var winSdks = g_WinSdks.Value;
+            if (!winSdks.Any())
+            {
+                this.Log.LogMessage(MessageImportance.High, "No Windows SDKs found.");
+            }
+
             WinSDK winSdk = null;
             if (string.IsNullOrEmpty(this.WinSDKVersion))
             {
-                winSdk = winSdks.First();
+                winSdk = winSdks.FirstOrDefault() ?? new WinSDK();
             }
             else
             {
@@ -128,7 +133,7 @@ namespace CompilerPaths.BuildTasks
                     throw new Exception($"Invalid version format for Windows SDK: '{this.WinSDKVersion}'");
                 }
 
-                // Enumerate VS versions.
+                // Enumerate WinSDK versions.
                 foreach (var versionMaybe in winSdks)
                 {
                     this.Log.LogMessage(MessageImportance.Normal, $"Consider Windows SDK version: {versionMaybe.Version}");
@@ -280,9 +285,9 @@ namespace CompilerPaths.BuildTasks
 
         private class WinSDK
         {
-            public Version Version;
-            public IEnumerable<string> IncPaths;
-            public IEnumerable<string> LibPaths;
+            public Version Version { get; set; } = new Version();
+            public IEnumerable<string> IncPaths { get; set; } = Enumerable.Empty<string>();
+            public IEnumerable<string> LibPaths { get; set; } = Enumerable.Empty<string>();
         }
 
         private static IEnumerable<WinSDK> GetAllWinSDK()
@@ -322,11 +327,6 @@ namespace CompilerPaths.BuildTasks
                         LibPaths = new[] { umLibDir, ucrtLibDir },
                     });
                 }
-            }
-
-            if (!sdks.Any())
-            {
-                throw new Exception("No Win10 SDK version found.");
             }
 
             return sdks.Values.ToArray();
