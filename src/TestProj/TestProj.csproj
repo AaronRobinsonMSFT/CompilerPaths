@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <!-- Set compiler discovery values -->
+  <PropertyGroup>
+    <MSVCPlatform>x64</MSVCPlatform>
+  </PropertyGroup>
+
+  <Target
+    Name="UseMSVC"
+    BeforeTargets="CoreCompile"
+    DependsOnTargets="MSVCFindCompilerPaths"
+    Condition="$([MSBuild]::IsOsPlatform(Windows))">
+
+    <Message Text="MSVCCompilerPath: $(MSVCCompilerPath)" Importance="High"/>
+    <Message Text="MSVCIncludePaths: @(MSVCIncludePaths)" Importance="High"/>
+    <Message Text="MSVCLibPaths: @(MSVCLibPaths)" Importance="High"/>
+
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="CompilerPaths" Version="1.*" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TestLocalBuild)' != ''">
+    <RestoreSources>
+        $(TestLocalBuild)
+    </RestoreSources>
+  </PropertyGroup>
+
+
+</Project>
