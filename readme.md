@@ -1,6 +1,6 @@
 # CompilerPaths MSBuild Task
 
-The CompilerPaths Task is an attempt to help discover compiler paths using MSBuild.
+The CompilerPaths Task is an attempt to help discover compiler paths using MSBuild. A [NuGet package](https://www.nuget.org/packages/CompilerPaths) is available.
 
 ## APIs
 
