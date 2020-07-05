@@ -80,6 +80,12 @@ namespace CompilerPaths.BuildTasks
         [Output]
         public string[] LibPaths { get; set; }
 
+        /// <summary>
+        /// Windows SDK tool path.
+        /// </summary>
+        [Output]
+        public string WinSDKToolPath { get; set; }
+
         /// <inheritdoc />
         public override bool Execute()
         {
@@ -181,6 +187,8 @@ namespace CompilerPaths.BuildTasks
 
             this.LibPaths = libPaths.ToArray();
 
+            this.WinSDKToolPath = Path.Combine(winSdk.BinPath, platform.ToString());
+
             return true;
         }
 
@@ -197,7 +205,7 @@ namespace CompilerPaths.BuildTasks
                 throw new NullReferenceException(nameof(this.Platform));
             }
 
-            return this.Platform switch
+            return this.Platform.ToLower() switch
             {
                 "x86" => PlatformType.x86,
                 "Win32" => PlatformType.x86,
@@ -286,6 +294,7 @@ namespace CompilerPaths.BuildTasks
         private class WinSDK
         {
             public Version Version { get; set; } = new Version();
+            public string BinPath { get; set; } = string.Empty;
             public IEnumerable<string> IncPaths { get; set; } = Enumerable.Empty<string>();
             public IEnumerable<string> LibPaths { get; set; } = Enumerable.Empty<string>();
         }
@@ -306,6 +315,14 @@ namespace CompilerPaths.BuildTasks
                         continue;
                     }
 
+                    // WinSDK bin path
+                    var binPath = Path.Combine(win10sdkRoot, "bin", verMaybe);
+                    if (!Directory.Exists(binPath))
+                    {
+                        // If version specific path doesn't exist fall back to default.
+                        binPath = Path.Combine(win10sdkRoot, "bin");
+                    }
+
                     // WinSDK inc and lib paths
                     var incDir = Path.Combine(win10sdkRoot, "Include", verMaybe);
                     var libDir = Path.Combine(win10sdkRoot, "Lib", verMaybe);
@@ -323,6 +340,7 @@ namespace CompilerPaths.BuildTasks
                     sdks.Add(versionMaybe, new WinSDK()
                     {
                         Version = versionMaybe,
+                        BinPath = binPath,
                         IncPaths = new[] { sharedIncDir, umIncDir, ucrtIncDir },
                         LibPaths = new[] { umLibDir, ucrtLibDir },
                     });

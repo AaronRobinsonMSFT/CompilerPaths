@@ -18,6 +18,7 @@
     <Message Text="MSVCCompilerPath: $(MSVCCompilerPath)" Importance="High"/>
     <Message Text="MSVCIncludePaths: @(MSVCIncludePaths)" Importance="High"/>
     <Message Text="MSVCLibPaths: @(MSVCLibPaths)" Importance="High"/>
+    <Message Text="MSVCWinSDKToolPath: $(MSVCWinSDKToolPath)" Importance="High"/>
 
   </Target>
 

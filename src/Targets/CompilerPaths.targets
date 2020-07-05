@@ -37,6 +37,7 @@ CompilerPaths.targets
       <Output TaskParameter="CompilerPath" PropertyName="MSVCCompilerPath" />
       <Output TaskParameter="IncludePaths" ItemName="MSVCIncludePaths" />
       <Output TaskParameter="LibPaths" ItemName="MSVCLibPaths" />
+      <Output TaskParameter="WinSDKToolPath" PropertyName="MSVCWinSDKToolPath" />
     </FindMSVCCompiler>
   </Target>
 </Project>

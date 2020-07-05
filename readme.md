@@ -25,6 +25,7 @@ Outputs:
 - `MSVCCompilerPath`: Property containing the absolute path to compiler.
 - `MSVCIncludePaths`: Item containing absolute paths to be used as `include` paths.
 - `MSVCLibPaths`: Item containing absolute paths to be used as `lib` paths.
+- `MSVCWinSDKToolPath`: Property containing the absolute path to the Windows SDK tools directory.
 
 Example:
 
