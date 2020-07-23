@@ -23,9 +23,14 @@ CompilerPaths.targets
 
 -->
 <Project>
+  <PropertyGroup>
+    <CompilerPathsTFM>netstandard2.1</CompilerPathsTFM>
+    <CompilerPathsTFM Condition="'$(MSBuildRuntimeType)' == 'Full'">net472</CompilerPathsTFM>
+  </PropertyGroup>
+
   <UsingTask
     TaskName="BuildTasks.FindMSVCCompiler"
-    AssemblyFile="../lib/netstandard2.1/BuildTasks.dll" />
+    AssemblyFile="../lib/$(CompilerPathsTFM)/BuildTasks.dll" />
 
   <Target Name="MSVCFindCompilerPaths">
     <Message Text="Computing MSVC compiler paths." Importance="High" />

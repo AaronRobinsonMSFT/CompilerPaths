@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net472;netstandard2.1</TargetFrameworks>
     <RootNamespace>CompilerPaths.BuildTasks</RootNamespace>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
