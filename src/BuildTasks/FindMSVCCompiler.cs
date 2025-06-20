@@ -196,6 +196,7 @@ namespace CompilerPaths.BuildTasks
         {
             x86,
             x64,
+            arm64
         }
 
         private PlatformType ConvertPlatform()
@@ -208,9 +209,10 @@ namespace CompilerPaths.BuildTasks
             return this.Platform.ToLower() switch
             {
                 "x86" => PlatformType.x86,
-                "Win32" => PlatformType.x86,
+                "win32" => PlatformType.x86,
                 "x64" => PlatformType.x64,
-                "AnyCPU" => Environment.Is64BitOperatingSystem ? PlatformType.x64 : PlatformType.x86,
+                "arm64" => PlatformType.arm64,
+                "anycpu" => Environment.Is64BitOperatingSystem ? PlatformType.x64 : PlatformType.x86,
                 _ => throw new NotSupportedException($"Unknown platform supplied: {this.Platform}")
             };
         }
