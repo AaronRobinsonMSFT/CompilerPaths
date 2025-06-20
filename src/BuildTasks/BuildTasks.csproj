@@ -17,7 +17,7 @@
 
   <PropertyGroup>
     <PackageId>CompilerPaths</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>AaronRobinsonMSFT</Authors>
     <Owners>AaronRobinsonMSFT</Owners>
     <Description>Package used to discover compiler paths in MSBuild.</Description>
